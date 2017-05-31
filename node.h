@@ -28,8 +28,8 @@ class Node
 {
    public:
       // constructors
-      Node(): pNext(NULL) {}
-      Node(const T & t): data(t), pNext(NULL) {}
+      Node(): pNext(NULL), pPrevious(NULL) {}
+      Node(const T & t): data(t), pNext(NULL), pPrevious(NULL){}
       
       // members
       Node <T> * pNext;
