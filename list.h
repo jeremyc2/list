@@ -37,7 +37,7 @@ public:
 	void remove(ListIterator<T> & it) throw (const char *);
 	T front() throw (const char *);
 	T back() throw (const char *);
-	ListIterator <T> insert(T & item) throw (const char *);
+	Node <T> * insert(const T & t, Node <T> * &pCurrent, bool isHead = false);
 	ListIterator <T> begin() throw (const char *);
 	ListIterator <T> rbegin();
 	ListIterator <T> end();
@@ -45,6 +45,7 @@ public:
 
 private:
 	int l_size;
+	Node <T> * &pHead;
 };
 
 /************************************************
@@ -138,7 +139,6 @@ private:
 			if (pCurrent == NULL)
 			{
 				pCurrent = pNew;
-				pCurrent->pNext = NULL;
 				return pNew;
 			}
 
@@ -201,12 +201,12 @@ private:
 	}
 
 	/***********************************************
-	* FREE DATA
+	* CLEAR
 	* Release all the memory contained in a given linked­list. The one parameter is a
 	* pointer to the head of the list. This should be a non­member function.
 	***********************************************/
 	template <class T>
-	void freeData(Node <T> * &pHead)
+	inline void List<T>::clear()
 	{
 		while (pHead != NULL)
 		{
@@ -225,17 +225,10 @@ private:
 	}
 
 	template<class T>
-	inline void List<T>::clear()
-	{
-
-	}
-
-	template<class T>
 	inline void List<T>::push_back(T & item) throw(const char *)
 	{
-		
+		insert(item, l_size, false);
 		l_size++;
-
 	}
 
 	template<class T>
@@ -260,12 +253,6 @@ private:
 	inline T List<T>::back() throw(const char *)
 	{
 		return T();
-	}
-
-	template<class T>
-	inline ListIterator<T> List<T>::insert(T & item) throw(const char *)
-	{
-		return ListIterator<T>();
 	}
 
 	template<class T>
